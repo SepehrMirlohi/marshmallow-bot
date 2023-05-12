@@ -1,0 +1,12 @@
+
+        # Checking for users in voice channels to give them xp because of client restarting
+        # for guild in client.guilds: 
+        #     for channel in guild.channels:
+        #         check_channel = channel.voice_channels
+        #         for voice_ch in check_channel:
+        #             channel_id = voice_ch.id
+        #             make_channel = client.get_channel(int(channel_id))
+        #             if make_channel.members:
+        #                 for member in make_channel.members:
+        #                     if not member.bot:
+        #                         still_on_voice_channel(int(member.id))
