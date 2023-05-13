@@ -50,7 +50,7 @@ class Member(commands.Cog) :
     async def on_member_update(self, before, after):
         if before.premium_since is None and after.premium_since is not None:
             update_boost_status(before.id, True)
-        elif after.premium_sinc is None and before.premium_since is not None:
+        elif after.premium_since is None and before.premium_since is not None:
             update_boost_status(before.id, False)
 
 

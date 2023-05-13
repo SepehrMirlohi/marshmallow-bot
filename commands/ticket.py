@@ -81,7 +81,7 @@ class Ticket(commands.Cog):
 
 
                 # admin = random.choice(get_list_of_admins())
-                payload = {"id": get_current_ticket_id() ,"user-id": user.id, "username": user.name, "admin-id": 0, "admin-log": "", "user-log": "", "channel-id": channel.id, "deleted": False}
+                payload = {"id": get_current_ticket_id() ,"user-id": user.id, "username": user.name,"admin-name": "" ,"admin-id": 0, "admin-log": "", "user-log": "", "channel-id": channel.id, "deleted": False}
                 save_ticket(payload)
                 # await channel.set_permissions(user, read_messages=True, send_messages=False)
                 # await channel.send(dir(channel))
@@ -130,10 +130,10 @@ class Ticket(commands.Cog):
                 end_chat_user = discord.Embed(title=f"Dear {user.name}", description="Thanks for answer him/her questions, The chatroom has been closed by you", color = discord.Colour.from_str("#F5B041"))
                 end_chat_log = discord.Embed(title=f"Ticket number {ticket_id} has been closed!", description=f"Related admin: {user.mention}", color= discord.Colour.from_str("#CB4335"))
                 #Starting processes ---------------------------
-                update_ticket(int(ticket_id), {"admin-id": user.id})
+                update_ticket(int(ticket_id), {"admin-id": user.id, "admin-name": user.name})
                 await channel.send(embed = chat_alert)
-                await channel.set_permissions(user, read_messages=True, send_messages=True)
-                await channel.set_permissions(member, send_messages=True)
+                await channel.set_permissions(user, read_messages = True, send_messages=True)
+                await channel.set_permissions(member, read_messages = True, send_messages=True)
 
                 #Start taking log from chatroom
                 while True:

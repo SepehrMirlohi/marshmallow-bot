@@ -21,14 +21,7 @@ class Test(commands.Cog):
     @commands.command()
     async def test2(self, ctx):
 
-        btn = Button(label="test", custom_id="test-1",style=discord.ButtonStyle.green)
-
-        async def callback(interaction):
-            await ctx.send(interaction.data['custom_id'])
-        btn.callback = callback
-        view = View()
-        view.add_item(btn)
-        await ctx.send(view = view)
+        await ctx.send(dir(ctx.author))
         
 
 
