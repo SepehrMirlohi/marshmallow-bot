@@ -77,7 +77,6 @@ class Colour(commands.Cog):
                                 
                                 if str(recheck.id) == str(color['color-id']):
                                     check_status = 1
-                                    print("WORKED!")
                             if have_color != 1:
 
                                 if check_status == 1:

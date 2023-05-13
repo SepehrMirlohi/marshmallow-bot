@@ -6,6 +6,7 @@ from discord import app_commands
 from lib.config import *
 
 
+
 #------------------------------------ Custom functions ---------------------------------------
 
 def find_invite_by_code(invite_list, code):

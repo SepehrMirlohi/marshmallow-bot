@@ -217,7 +217,69 @@ def update_boost_status(name: int, status: bool):
         if user["name"] == name:
             user['boost'] = status
     database.UpdateOne({"name": name}, data)
+
+
+# Tickets -----------------------------------
+def get_current_ticket_id():
+    database = DB("tickets")
+    data = list(database.GetAllData())
+    return len(data) + 1
+
+def update_ticket(ticket: int, payload: dict):
+    database = DB("tickets")
+    keys, values = zip(*payload.items())
+    data = database.GetOneData({'id': ticket})
+    counter = 0
+    for i in keys:
+        data[i] = values[counter]
+        counter += 1
+
+
+    database.UpdateOne({"id": ticket}, data)   
+
+def save_ticket(peyload):
+    database = DB("tickets")
+    database.AddOneData(peyload)
+
+def get_ticket(id: int):
+    database = DB("tickets")
+    data = database.GetOneData({'id': id})
+    if data: return data
+
+def is_ticket_exists(member: int):
+    database = DB("tickets")
+    data = database.GetAllData({"user-id": member})
+    if data:
+        for one in data:
+            if not one['deleted']:
+                return True
+    # return False
+
+        
     
+
+#Admins -------------------------------
+def get_list_of_admins():
+    database = DB("staff")
+    data = database.GetOneData()
+    admin_names = []
+    for admin in data['admin']:
+        admin_names.append(admin['admin-id'])
+    return admin_names
+def save_admin(payload):
+    database = DB("staff")
+    data = database.GetOneData()
+    data['admin'].append(payload)
+    database.UpdateOne({}, data)
+
+
+
+
+
+
+
+
+
 # def check_xp_for_lvl(name, defaultPoints):
 #     with open("database/member-info.json", 'r') as file:
 #         file_to_read = json.load(file)

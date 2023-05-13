@@ -47,7 +47,7 @@ class DB():
         return False
 
     def GetAllData(self, condition: dict = {}):
-        result = self.collection.find()
+        result = self.collection.find(condition)
         if result: 
             return result
         
