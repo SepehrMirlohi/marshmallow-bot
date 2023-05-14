@@ -81,7 +81,7 @@ class Ticket(commands.Cog):
 
 
                 # admin = random.choice(get_list_of_admins())
-                payload = {"id": get_current_ticket_id() ,"user-id": user.id, "username": user.name,"admin-name": "" ,"admin-id": 0, "admin-log": "", "user-log": "", "channel-id": channel.id, "deleted": False}
+                payload = {"id": get_current_ticket_id() ,"user-id": user.id, "username": user.name,"admin-name": "" ,"admin-id": 0, "log": "", "channel-id": channel.id, "deleted": False}
                 save_ticket(payload)
                 # await channel.set_permissions(user, read_messages=True, send_messages=False)
                 # await channel.send(dir(channel))
@@ -91,8 +91,9 @@ class Ticket(commands.Cog):
         async def admin_process(interaction):
 
             # define important variables
-            admin_log = ""
-            member_log = ""
+            # admin_log = ""
+            # member_log = ""
+            log = ""
             end_log_channel = self.client.get_channel(1018472547110617128)
             await interaction.response.defer(ephemeral=True)
             user = interaction.user
@@ -151,12 +152,12 @@ class Ticket(commands.Cog):
 
                             break
                         else:
-                            admin_log = admin_log +"//"+ str(message.content)
+                            log = log +"//admin::"+ str(message.content)
                             
                     elif message.author == member:
-                        member_log = member_log + "//" + str(message.content)
+                        log = log + "//member::" + str(message.content)
 
-                update_ticket(int(ticket_id), {"admin-log": admin_log, "user-log": member_log})
+                update_ticket(int(ticket_id), {"log": log})
                 
 
             else:

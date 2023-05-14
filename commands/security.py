@@ -42,16 +42,19 @@ class Security(commands.Cog):
             message = await self.client.wait_for("message", check = check, timeout= 20)
             ticket = get_ticket(int(message.content))
             if ticket:
-                admin_log = ticket['admin-log'].split("//")
-                member_log = ticket['user-log'].split("//")
+                # admin_log = ticket['admin-log'].split("//")
+                # member_log = ticket['user-log'].split("//")
+                log = ticket['log'].split("//")
+                for edit in log:
+                    await ctx.send(edit)
                 #Embeds 
-                log_embed = discord.Embed(title=f"Chat between {ticket['admin-name']} and {ticket['username']}", description="", color= discord.Colour.from_str("#8E44AD"))
-                for admin in admin_log:
-                    for member in member_log:
-                        log_embed.add_field(name = "", value = admin, inline=True)
-                        log_embed.add_field(name = "", value = member, inline=False)
+                # log_embed = discord.Embed(title=f"Chat between {ticket['admin-name']} and {ticket['username']}", description="", color= discord.Colour.from_str("#8E44AD"))
+                # for admin in admin_log:
+                #     for member in member_log:
+                #         log_embed.add_field(name = "", value = admin, inline=True)
+                #         log_embed.add_field(name = "", value = member, inline=False)
 
-                await interaction.channel.send(embed = log_embed)
+                # await interaction.channel.send(embed = log_embed)
 
 
         async def admin_list_process(interaction):
