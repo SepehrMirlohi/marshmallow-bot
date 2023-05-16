@@ -41,12 +41,36 @@ class Security(commands.Cog):
                     
             message = await self.client.wait_for("message", check = check, timeout= 20)
             ticket = get_ticket(int(message.content))
+
+            
             if ticket:
                 # admin_log = ticket['admin-log'].split("//")
                 # member_log = ticket['user-log'].split("//")
+                log_embed = discord.Embed(title=f"Chat between {ticket['admin-name']} and {ticket['username']}", description="", color= discord.Colour.from_str("#8E44AD"))
                 log = ticket['log'].split("//")
+                counter = 2
+                which_user = 0
                 for edit in log:
-                    await ctx.send(edit)
+                    edited = edit.split("::")
+                    inline = True
+                    
+                    if counter%2 == 0:
+                        inline = False
+
+
+                    if (edited[0] == "admin"):
+                        which_user = 1
+                        log_embed.add_field(name = "Admin:", value = edited[-1], inline=inline)
+                        print(inline)
+                    else:
+                        which_user = 0
+                        log_embed.add_field(name = "Member:", value = edited[-1], inline=inline)
+                        print(inline)
+                    
+                    counter += 1
+
+                
+                await ctx.send(embed = log_embed)
                 #Embeds 
                 # log_embed = discord.Embed(title=f"Chat between {ticket['admin-name']} and {ticket['username']}", description="", color= discord.Colour.from_str("#8E44AD"))
                 # for admin in admin_log:

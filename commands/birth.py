@@ -10,6 +10,7 @@ class BirthDay(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_any_role(1018134791943635015, 1098919905782419600)
     async def play(self, ctx):
         channel = self.client.get_channel(1018479145442885662)
         voice = await channel.connect()

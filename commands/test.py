@@ -9,6 +9,7 @@ class Test(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_any_role(1018134791943635015, 1098919905782419600)
     async def test(self, ctx):
         counter = 1
         for guild in self.client.guilds:
@@ -19,6 +20,7 @@ class Test(commands.Cog):
                     add_colour_roles(peyload)
 
     @commands.command()
+    @commands.has_any_role(1018134791943635015, 1098919905782419600)
     async def test2(self, ctx):
 
         await ctx.send(dir(ctx.author))

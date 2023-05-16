@@ -9,6 +9,7 @@ class Clear(commands.Cog):
         self.client = client
 
     @app_commands.command(name="clear", description = "clear amount of messages")
+    @commands.has_any_role(1018134791943635015, 1098919905782419600)
     @app_commands.describe(amount = "amount of clearing")
     async def clear(self, interaction: discord.Interaction, amount: int, member: discord.Member = None):
         await interaction.response.defer(ephemeral= True)

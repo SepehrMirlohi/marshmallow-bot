@@ -94,6 +94,7 @@ async def refresh_member_list():
 
 client = Client()
 
+client.remove_command("help")
 
 
 client.run(TOKEN)

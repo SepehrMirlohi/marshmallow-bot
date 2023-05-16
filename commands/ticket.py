@@ -26,6 +26,11 @@ class Ticket(commands.Cog):
         public_embed = discord.Embed(title="Normal Ticket", description="", color=discord.Colour.from_str("#F7DC6F"))
         public_embed.add_field(name="", value="Here you can send a ticket after you sent your ticket hold on one of our admin will appear in your channel to help you!", inline=True)
         public_embed.set_footer(text="Marshmallow moderation")
+       
+       
+        staff_embed = discord.Embed(title="Staff Ticket", description="", color=discord.Colour.from_str("#F7DC6F"))
+        staff_embed.add_field(name="", value="If you wanted to join our staff team use this ticket and compelete the following fields!", inline=True)
+        staff_embed.set_footer(text="Marshmallow moderation")
 
         def make_alert(ticket: int, member: str):
             admin_alert = discord.Embed(title=f"Ticket {ticket}", description=f"A member {member} has sent a ticket, open the chat and answer his/her questions!", color=discord.Colour.from_str("#F1C40F"))
@@ -39,6 +44,7 @@ class Ticket(commands.Cog):
         menu_btn_public = Button(label="Normal", style=discord.ButtonStyle.gray)
 
         public_btn = Button(label = "Ticket", style= discord.ButtonStyle.gray)
+        staff_btn = Button(label = "Ticket", style= discord.ButtonStyle.gray)
 
         def custom_btn(ticket: int):
 
@@ -51,7 +57,10 @@ class Ticket(commands.Cog):
 
         async def callback_staff(interaction):
 
-            await interaction.response.defer(ephemeral=True)
+            await interaction.response.edit_message(view = view_staff, embed = staff_embed)
+
+        async def callback_staff_channel(interaction):
+            pass
 
         async def callback_public_channel(interaction):
             await interaction.response.defer(ephemeral=True)
@@ -171,6 +180,7 @@ class Ticket(commands.Cog):
         menu_btn_staff.callback = callback_staff
         menu_btn_public.callback = callback_public
         public_btn.callback = callback_public_channel
+        staff_btn.callback = callback_staff_channel
 
       
 
@@ -180,6 +190,9 @@ class Ticket(commands.Cog):
 
         view_public = View(timeout= None)
         view_public.add_item(public_btn)
+
+        view_staff = View(timeout= None)
+        view_staff.add_item(staff_btn)
 
         def create_custom_view(ticket: int):
 

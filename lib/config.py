@@ -255,7 +255,15 @@ def is_ticket_exists(member: int):
                 return True
     # return False
 
-        
+# Staff Tickets ---------------------------
+def get_staff_ticket(id: int):
+    database = DB("tickets")
+    data = database.GetOneData({'id': id})
+    if data: return data
+
+def save_staff_ticket(peyload):
+    database = DB("tickets")
+    database.AddOneData(peyload)
     
 
 #Admins -------------------------------
@@ -276,7 +284,9 @@ def save_admin(payload):
 
 
 
-
+# for i in get_ticket(6)['log'].split("//"):
+#     log = i.split("::")
+#     print(log[-1])
 
 
 

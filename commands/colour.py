@@ -10,6 +10,7 @@ class Colour(commands.Cog):
         self.client = client
 
     @commands.command()
+    @commands.has_any_role(1018134791943635015, 1098919905782419600)
     async def roles(self, ctx):
         if ctx.author.id == 767030513088331797:
             # Embeds -----------------------------------------------------------------
